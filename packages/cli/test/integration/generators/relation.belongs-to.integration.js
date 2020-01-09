@@ -122,18 +122,6 @@ describe('lb4 relation', function() {
         sourceModel: 'Order',
         destinationModel: 'Customer',
       },
-      {
-        relationType: 'belongsTo',
-        sourceModel: 'OrderClass',
-        destinationModel: 'CustomerClass',
-        relationName: 'customer',
-      },
-      {
-        relationType: 'belongsTo',
-        sourceModel: 'OrderClassType',
-        destinationModel: 'CustomerClassType',
-        relationName: 'customer',
-      },
     ];
 
     promptArray.forEach(function(multiItemPrompt, i) {
@@ -174,19 +162,7 @@ describe('lb4 relation', function() {
         relationType: 'belongsTo',
         sourceModel: 'Order',
         destinationModel: 'Customer',
-        sourceKeyName: 'customerId',
-      },
-      {
-        relationType: 'belongsTo',
-        sourceModel: 'OrderClass',
-        destinationModel: 'CustomerClass',
-        relationName: 'myRelation',
-      },
-      {
-        relationType: 'belongsTo',
-        sourceModel: 'OrderClassType',
-        destinationModel: 'CustomerClassType',
-        relationName: 'myRelation',
+        foreignKeyName: 'customerId',
       },
       {
         relationType: 'hasMany',
@@ -206,7 +182,7 @@ describe('lb4 relation', function() {
             additionalFiles: SANDBOX_FILES,
           }),
         )
-        .withPrompts(promptList[3]);
+        .withPrompts(promptList[1]);
 
       await testUtils
         .executeGenerator(generator)
@@ -234,7 +210,7 @@ describe('lb4 relation', function() {
         relationType: 'belongsTo',
         sourceModel: 'Order',
         destinationModel: 'Customer',
-        sourceKeyName: 'customerId',
+        foreignKeyName: 'customerId',
         relationName: 'my_customer',
       },
       {
@@ -287,11 +263,7 @@ describe('lb4 relation', function() {
         relationType: 'belongsTo',
         sourceModel: 'OrderClass',
         destinationModel: 'CustomerClass',
-      },
-      {
-        relationType: 'belongsTo',
-        sourceModel: 'OrderClassType',
-        destinationModel: 'CustomerClassType',
+        relationName: 'my_customer',
       },
     ];
 
@@ -356,12 +328,14 @@ describe('lb4 relation', function() {
         relationType: 'belongsTo',
         sourceModel: 'OrderClass',
         destinationModel: 'CustomerClass',
+        relationName: 'customer',
         registerInclusionResolver: true,
       },
       {
         relationType: 'belongsTo',
         sourceModel: 'OrderClassType',
         destinationModel: 'CustomerClassType',
+        relationName: 'customer',
         registerInclusionResolver: false,
       },
     ];
