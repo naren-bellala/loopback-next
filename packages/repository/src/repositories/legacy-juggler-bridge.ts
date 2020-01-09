@@ -583,7 +583,7 @@ export class DefaultCrudRepository<
       const relName = def.relations[r].name;
       if (relName in data) {
         throw new Error(
-          `Navigational properties are not allowed in model data (model "${this.entityClass.modelName}" property "${relName}")`,
+          `Navigational properties are not allowed in model data (model "${this.entityClass.modelName}" property "${relName}"). Please remove it or make sure the relation name is not the same as the property name in belongsTo relation.`,
         );
       }
     }

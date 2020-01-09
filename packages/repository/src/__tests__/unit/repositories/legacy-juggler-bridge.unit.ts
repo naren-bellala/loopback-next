@@ -470,7 +470,7 @@ describe('DefaultCrudRepository', () => {
             files: [{title: 'nav property'}],
           }),
         ).to.be.rejectedWith(
-          'Navigational properties are not allowed in model data (model "Folder" property "files")',
+          'Navigational properties are not allowed in model data (model "Folder" property "files"). Please remove it or make sure the relation name is not the same as the property name in belongsTo relation.',
         );
       });
 

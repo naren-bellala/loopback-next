@@ -221,7 +221,7 @@ export function hasManyRelationAcceptance(
           ],
         }),
       ).to.be.rejectedWith(
-        'Navigational properties are not allowed in model data (model "Customer" property "orders")',
+        'Navigational properties are not allowed in model data (model "Customer" property "orders"). Please remove it or make sure the relation name is not the same as the property name in belongsTo relation.',
       );
     });
 
@@ -238,7 +238,7 @@ export function hasManyRelationAcceptance(
           },
         ]),
       ).to.be.rejectedWith(
-        'Navigational properties are not allowed in model data (model "Customer" property "orders")',
+        'Navigational properties are not allowed in model data (model "Customer" property "orders"). Please remove it or make sure the relation name is not the same as the property name in belongsTo relation.',
       );
     });
 
@@ -269,7 +269,9 @@ export function hasManyRelationAcceptance(
           name: 'Nintendo',
           orders: [{description: 'Switch'}],
         }),
-      ).to.be.rejectedWith(/Navigational properties are not allowed.*"orders"/);
+      ).to.be.rejectedWith(
+        /Navigational properties are not allowed.*"orders".*/,
+      );
     });
 
     it('throws when the instance contains navigational property when operates updateById()', async () => {
@@ -280,7 +282,9 @@ export function hasManyRelationAcceptance(
           name: 'Luigi',
           orders: [{description: 'Nintendo'}],
         }),
-      ).to.be.rejectedWith(/Navigational properties are not allowed.*"orders"/);
+      ).to.be.rejectedWith(
+        /Navigational properties are not allowed.*"orders".* /,
+      );
     });
 
     it('throws when the instance contains navigational property when operates delete()', async () => {
@@ -296,7 +300,7 @@ export function hasManyRelationAcceptance(
       });
 
       await expect(customerRepo.delete(found)).to.be.rejectedWith(
-        'Navigational properties are not allowed in model data (model "Customer" property "orders")',
+        `Navigational properties are not allowed in model data (model "Customer" property "orders"). Please remove it or make sure the relation name is not the same as the property name in belongsTo relation.`,
       );
     });
 
