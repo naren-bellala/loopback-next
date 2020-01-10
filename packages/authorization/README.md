@@ -6,7 +6,7 @@ Vote based)
 To read on key building blocks read through
 [loopback authorization docs](https://loopback.io/doc/en/lb4/Loopback-component-authorization.html)
 
-![Authorization](authorization.png)
+![Authorization](imgs/authorization.png)
 
 ## Installation
 
@@ -106,8 +106,14 @@ app.bind('authorizationProviders.my-authorizer-provider')
 ```
 
 After setting up the authorization system, you can create a user with role
-`ADMIN`, login and get the token, then visit the endpoint `GET /number-of-views`
+`ADMIN`, login and get the token, then visit endpoint `GET /number-of-views`
 with the generated token in the request header.
+
+Here is the use case and diagram for the example:
+
+![Use case](imgs/use-case.png)
+
+![Example diagram](imgs/example-diagram.png)
 
 ## Extract common layer
 
