@@ -144,21 +144,28 @@ exports.validateNotExisting = function(projDir) {
  * validate source key or foreign key for relations
  */
 exports.validateKeyName = function(name) {
+  /* istanbul ignore next */
   if (!name || name === '') {
+    /* istanbul ignore next */
     return 'Key name cannot be empty';
   }
+  /* istanbul ignore next */
   if (!isNaN(name.charAt(0))) {
     return util.format('Key name cannot start with a number: %s', name);
   }
+  /* istanbul ignore next */
   if (name.includes('.')) {
     return util.format('Key name cannot contain .: %s', name);
   }
+  /* istanbul ignore next */
   if (name.includes(' ')) {
     return util.format('Key name cannot contain spaces: %s', name);
   }
+  /* istanbul ignore next */
   if (name.includes('-')) {
     return util.format('Key name cannot contain hyphens: %s', name);
   }
+  /* istanbul ignore next */
   if (name.match(/[\/@\s\+%:]/)) {
     return util.format(
       'Key name cannot contain special characters (/@+%: ): %s',
@@ -173,27 +180,35 @@ exports.validateKeyName = function(name) {
  * which is an invalid case.
  */
 exports.validateRelationName = function(name, type, foreignKeyName) {
+  /* istanbul ignore next */
   if (!name || name === '') {
     return 'Relation name cannot be empty';
   }
+  /* istanbul ignore next */
   if (type === 'belongsTo' && name === foreignKeyName) {
     return util.format(
       'Relation name cannot be the same as the source key name: %s',
       name,
     );
   }
+  /* istanbul ignore next */
   if (!isNaN(name.charAt(0))) {
+    /* istanbul ignore next */
     return util.format('Relation name cannot start with a number: %s', name);
   }
+  /* istanbul ignore next */
   if (name.includes('.')) {
     return util.format('Relation name cannot contain .: %s', name);
   }
+  /* istanbul ignore next */
   if (name.includes(' ')) {
     return util.format('Relation name cannot contain spaces: %s', name);
   }
+  /* istanbul ignore next */
   if (name.includes('-')) {
     return util.format('Relation name cannot contain hyphens: %s', name);
   }
+  /* istanbul ignore next */
   if (name.match(/[\/@\s\+%:]/)) {
     return util.format(
       'Relation name cannot contain special characters (/@+%: ): %s',

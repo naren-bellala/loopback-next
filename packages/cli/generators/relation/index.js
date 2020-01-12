@@ -155,6 +155,7 @@ module.exports = class RelationGenerator extends ArtifactGenerator {
         'model',
       );
     } catch (err) {
+      /* istanbul ignore next */
       return this.exit(err);
     }
     let repoList;
@@ -165,10 +166,12 @@ module.exports = class RelationGenerator extends ArtifactGenerator {
         'repository',
       );
     } catch (err) {
+      /* istanbul ignore next */
       return this.exit(err);
     }
 
     if (modelList.length === 0) {
+      /* istanbul ignore next */
       return this.exit(
         new Error(
           `${ERROR_NO_MODELS_FOUND} ${this.artifactInfo.modelDir}.
@@ -182,6 +185,7 @@ module.exports = class RelationGenerator extends ArtifactGenerator {
     if (this.options[parameter]) {
       this.isChecked[parameter] = true;
       if (!modelList.includes(this.options[parameter])) {
+        /* istanbul ignore next */
         return this.exit(
           new Error(
             `"${this.options[parameter]}" ${ERROR_MODEL_DOES_NOT_EXIST}`,
@@ -208,12 +212,14 @@ module.exports = class RelationGenerator extends ArtifactGenerator {
     ]).then(props => {
       if (this.isChecked[parameter]) return;
       if (!modelList.includes(props[parameter])) {
+        /* istanbul ignore next */
         return this.exit(
           new Error(`"${props[parameter]}" ${ERROR_MODEL_DOES_NOT_EXIST}`),
         );
       }
       // checks if the corresponding repository exists
       if (!repoList.includes(props[parameter])) {
+        /* istanbul ignore next */
         return this.exit(
           new Error(
             `${props[parameter]}Repository ${ERROR_REPOSITORY_DOES_NOT_EXIST}`,
@@ -238,6 +244,7 @@ module.exports = class RelationGenerator extends ArtifactGenerator {
         `Relation type received from command line: ${this.options.relationType}`,
       );
       if (!relationTypeChoices.includes(this.options.relationType)) {
+        /* istanbul ignore next */
         return this.exit(new Error(ERROR_INCORRECT_RELATION_TYPE));
       }
 
@@ -257,6 +264,7 @@ module.exports = class RelationGenerator extends ArtifactGenerator {
     ]).then(props => {
       if (this.isChecked.relationType) return;
       if (!relationTypeChoices.includes(props.relationType)) {
+        /* istanbul ignore next */
         this.exit(new Error(ERROR_INCORRECT_RELATION_TYPE));
       }
       Object.assign(this.artifactInfo, props);
@@ -302,6 +310,7 @@ module.exports = class RelationGenerator extends ArtifactGenerator {
       this.artifactInfo.sourceModel,
     );
     if (this.artifactInfo.sourceModelPrimaryKey == null) {
+      /* istanbul ignore next */
       return this.exit(
         new Error(ERROR_SOURCE_MODEL_PRIMARY_KEY_DOES_NOT_EXIST),
       );
@@ -321,6 +330,7 @@ module.exports = class RelationGenerator extends ArtifactGenerator {
       this.artifactInfo.destinationModel,
     );
     if (this.artifactInfo.destinationModelPrimaryKey == null) {
+      /* istanbul ignore next */
       return this.exit(
         new Error(ERROR_DESTINATION_MODEL_PRIMARY_KEY_DOES_NOT_EXIST),
       );
@@ -394,6 +404,7 @@ module.exports = class RelationGenerator extends ArtifactGenerator {
         try {
           relationUtils.doesRelationExist(cl, this.artifactInfo.foreignKeyName);
         } catch (err) {
+          /* istanbul ignore next */
           this.exit(err);
         }
       }
@@ -453,6 +464,7 @@ module.exports = class RelationGenerator extends ArtifactGenerator {
           props.relationName,
         )
       ) {
+        /* istanbul ignore next */
         return this.exit(
           new Error(
             `relation ${props.relationName} already exists in the repository ${this.artifactInfo.srcRepositoryClassName}.`,
@@ -508,6 +520,7 @@ module.exports = class RelationGenerator extends ArtifactGenerator {
     try {
       await relationGenerator.generateAll(this.artifactInfo);
     } catch (error) {
+      /* istanbul ignore next */
       this.exit(error);
     }
   }
