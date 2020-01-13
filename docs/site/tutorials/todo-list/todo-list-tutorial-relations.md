@@ -48,7 +48,10 @@ https://loopback.io/doc/en/lb4/HasMany-relation.html#relation-metadata and other
 relations as well.
 " %}
 
-### Behind the scene
+To practice adding another relation, see the
+[Adding a `HasOne` relation](todo-list-tutorial-has-one-relation.md) page.
+
+### Behind the scenes
 
 If you want to understand the code changes introduced from the relation
 generator command, read on the details in this section; otherwise, you are ready
@@ -87,11 +90,57 @@ export class Todo extends Entity {
 
 #### Inclusion of Related Models
 
-When we ran the `lb4 relation` command, we accepted the default of `Yes` to the
-prompt:
+You'll notice there's a `TodoRelations` interface in the `Todo` model class file
+as well as a `TodoWithRelations` type defined.
+
+{% include code-caption.html content="src/models/todo.model.ts" %}
+
+```ts
+export interface TodoRelations {
+  // describe navigational properties here
+}
+
+export type TodoWithRelations = Todo & TodoRelations;
+```
+
+In the `TodoRelations` interface, we want to describe a `todoList` as a
+navigational property. We can do that as follows:
+
+{% include code-caption.html content="src/models/todo.model.ts" %}
+
+```ts
+// add TodoListWithRelations to the following import
+import {TodoList, TodoListWithRelations} from './todo-list.model';
+```
+
+```ts
+export interface TodoRelations {
+  // add the following line
+  todoList?: TodoListWithRelations;
+}
+```
+
+Let's add a `todo` navigational property to the `TodoList` model as well:
+
+{% include code-caption.html content="src/models/todo-list.model.ts" %}
+
+```ts
+// add TodoWithRelations to the following import
+import {Todo, TodoWithRelations} from './todo.model';
+```
+
+```ts
+export interface TodoRelations {
+  // add the following line
+  todos?: TodoWithRelations[];
+}
+```
+
+Further, when we ran the `lb4 relation` command, we accepted the default of
+`Yes` to the prompt:
 
 ```sh
-? Allow Order queries to include data from related Customer instances? (Y/n)
+? Allow Todo queries to include data from related TodoList instances? (Y/n)
 ```
 
 This registers the `inclusionResolver` for the relation(s) you were working with
